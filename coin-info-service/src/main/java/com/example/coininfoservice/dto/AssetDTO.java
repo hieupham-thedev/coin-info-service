@@ -1,9 +1,10 @@
 package com.example.coininfoservice.dto;
 
+import com.example.coininfoservice.serializer.MoneySerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -30,6 +31,7 @@ public class AssetDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataEnd;
     @JsonProperty("price_usd")
+    @JsonSerialize(using = MoneySerializer.class)
     private BigDecimal priceUSD;
 
     @Override

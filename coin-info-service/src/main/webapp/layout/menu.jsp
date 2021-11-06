@@ -1,5 +1,5 @@
 <div>
-    <ul>
-        <li><a href="${pageContext.request.contextPath}/assets">Asset Management</a></li>
-    </ul>
+    <div class="my-3">
+        <a type="button" class="w-100 btn btn-dark" href="${pageContext.request.contextPath}/assets">Asset Management</a>
+    </div>
 </div>

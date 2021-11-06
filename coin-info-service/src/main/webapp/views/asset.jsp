@@ -2,12 +2,12 @@
     <table id="myTable" class="table table-striped table-bordered">
         <thead>
         <tr>
-            <th>asset_id</th>
-            <th>name</th>
-            <th>type_is_crypto</th>
-            <th>data_start</th>
-            <th>data_end</th>
-            <th>price_usd</th>
+            <th>Asset ID</th>
+            <th>Name</th>
+            <th>IsCrypto</th>
+            <th>Data Start</th>
+            <th>Data End</th>
+            <th>Price (USD)</th>
         </tr>
         </thead>
     </table>
@@ -15,7 +15,7 @@
         $(document).ready(function () {
             $('#myTable').DataTable({
                 ajax: {
-                    url: 'http://localhost:8089/api/asset/getAll',
+                    url: '${pageContext.request.contextPath}/api/asset/getAll',
                     method: 'POST',
                     dataSrc: ''
                 },

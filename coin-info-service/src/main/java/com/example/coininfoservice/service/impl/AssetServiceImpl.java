@@ -30,7 +30,7 @@ public class AssetServiceImpl implements AssetService {
 
             ResponseEntity<AssetDTO[]> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, AssetDTO[].class);
 
-            return Arrays.stream(response.getBody()).collect(Collectors.toList());
+            return Arrays.stream(response.getBody()).filter(assetDTO -> assetDTO.getPriceUSD() != null).collect(Collectors.toList());
         } catch (Throwable t) {
             return null;
         }
