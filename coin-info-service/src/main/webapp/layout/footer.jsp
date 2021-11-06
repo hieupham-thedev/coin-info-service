@@ -1,1 +1,1 @@
-<div class="container-fluid border">Footer</div>
+<div class="container-fluid border bg-info text-light d-flex justify-content-center align-items-center" style="height: 10vh">Powered by Spring</div>
