@@ -38,9 +38,26 @@ public class AssetServiceImpl implements AssetService {
 
             ResponseEntity<AssetDTO[]> response = restTemplate.exchange(uriBuilder.toUriString(), HttpMethod.GET, entity, AssetDTO[].class);
 
-            return Arrays.stream(response.getBody()).filter(assetDTO -> assetDTO.getPriceUSD() != null).collect(Collectors.toList());
+            return Arrays.stream(response.getBody())
+                    .filter(assetDTO -> assetDTO.getPriceUSD() != null)
+                    .filter(assetDTO -> checkURLAvailability(assetDTO.getIconUrl()))
+                    .collect(Collectors.toList());
         } catch (Throwable t) {
             return null;
+        }
+    }
+
+    private boolean checkURLAvailability(String url) {
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            if (HttpStatus.OK.equals(response.getStatusCode())) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Throwable t) {
+            return false;
         }
     }
 }
