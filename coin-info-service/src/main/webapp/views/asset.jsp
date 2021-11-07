@@ -2,6 +2,7 @@
     <table id="myTable" class="table table-striped table-bordered">
         <thead>
         <tr>
+            <th>Icon</th>
             <th>Asset ID</th>
             <th>Name</th>
             <th>IsCrypto</th>
@@ -20,12 +21,18 @@
                     dataSrc: ''
                 },
                 columns: [
-                    { data: 'asset_id' },
-                    { data: 'name' },
-                    { data: 'type_is_crypto' },
-                    { data: 'data_start' },
-                    { data: 'data_end' },
-                    { data: 'price_usd' },
+                    {
+                        data: 'icon_url',
+                        render: function (data) {
+                            return `<img src="` + data + `" alt="coin_img"/>`;
+                        }
+                    },
+                    {data: 'asset_id'},
+                    {data: 'name'},
+                    {data: 'type_is_crypto'},
+                    {data: 'data_start'},
+                    {data: 'data_end'},
+                    {data: 'price_usd'},
                 ],
                 responsive: true
             });
