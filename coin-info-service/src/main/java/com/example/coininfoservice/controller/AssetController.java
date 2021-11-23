@@ -1,7 +1,7 @@
 package com.example.coininfoservice.controller;
 
 import com.example.coininfoservice.dto.AssetDTO;
-import com.example.coininfoservice.service.AssetService;
+import com.example.coininfoservice.service.impl.CacheService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,22 +14,16 @@ import java.util.List;
 @RequestMapping("/api/asset")
 public class AssetController {
 
-    private AssetService assetService;
+    private CacheService cacheService;
 
-    public AssetController(AssetService assetService) {
-        this.assetService = assetService;
+    public AssetController(CacheService cacheService) {
+        this.cacheService = cacheService;
     }
 
     @PostMapping("/getAll")
     public ResponseEntity<List<AssetDTO>> getAllAssets() {
-        List<AssetDTO> assets = assetService.getAllAssets();
-        HttpStatus status;
-        if (assets != null) {
-            status = HttpStatus.OK;
-        } else {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(assets, status);
+        List<AssetDTO> assets = cacheService.getCachedAssets();
+        return new ResponseEntity<>(assets, HttpStatus.OK);
     }
 
 }
