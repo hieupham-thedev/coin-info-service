@@ -1,1 +1,5 @@
-<div class="container-fluid border bg-info text-light d-flex justify-content-center align-items-center" style="height: 10vh">Powered by Spring</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted text-center">Powered by Spring</p>
+    </div>
+</footer>

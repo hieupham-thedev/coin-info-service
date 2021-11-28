@@ -1,4 +1,4 @@
-<div class="w-100">
+<div class="col-sm-9 main">
     <table id="myTable" class="table table-striped table-bordered">
     </table>
     <script>
@@ -55,3 +55,5 @@
 
     </script>
 </div>
+
+

@@ -3,18 +3,22 @@
 <head>
     <title><tiles:getAsString name="title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.11.3/r-2.2.9/datatables.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.11.3/r-2.2.9/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/datatables.net-bs4/css/dataTables.bootstrap4.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/datatables.net-responsive-bs4/css/responsive.bootstrap4.css"/>
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+    <script type="text/javascript" src="/lib/datatables.net-responsive/js/dataTables.responsive.js"></script>
+    <script type="text/javascript" src="/lib/datatables.net-responsive-bs4/js/responsive.bootstrap4.js"></script>
 </head>
 <body>
 <tiles:insertAttribute name="header"/>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="border col-3 bg-light"><tiles:insertAttribute name="menu"/></div>
-        <div class="border col-9 p-3"><tiles:insertAttribute name="body"/></div>
+        <tiles:insertAttribute name="menu"/>
+        <tiles:insertAttribute name="body"/>
     </div>
 </div>
 <tiles:insertAttribute name="footer"/>
