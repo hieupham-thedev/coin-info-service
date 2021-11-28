@@ -1,16 +1,5 @@
 <div class="col-sm-9 main">
     <table id="myTable" class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Icon</th>
-            <th>Asset ID</th>
-            <th>Name</th>
-            <th>IsCrypto</th>
-            <th>Data Start</th>
-            <th>Data End</th>
-            <th>Price (USD)</th>
-        </tr>
-        </thead>
     </table>
     <script>
         $(document).ready(function () {
@@ -20,19 +9,45 @@
                     method: 'POST',
                     dataSrc: ''
                 },
+                columnDefs: [{
+                    targets: "_all",
+                    defaultContent: ""
+                }],
                 columns: [
                     {
                         data: 'icon_url',
                         render: function (data) {
                             return `<img src="` + data + `" alt="coin_img"/>`;
-                        }
+                        },
+                        title: 'Icon'
                     },
-                    {data: 'asset_id'},
-                    {data: 'name'},
-                    {data: 'type_is_crypto'},
-                    {data: 'data_start'},
-                    {data: 'data_end'},
-                    {data: 'price_usd'},
+                    {
+                        data: 'asset_id',
+                        title: 'Asset ID'
+                    },
+                    {
+                        data: 'name',
+                        title: 'Name'
+                    },
+                    {
+                        data: 'type_is_crypto',
+                        render: function (data) {
+                            return data ? 'Yes' : 'No';
+                        },
+                        title: 'Crypto ?'
+                    },
+                    {
+                        data: 'data_start',
+                        title: 'Data Start'
+                    },
+                    {
+                        data: 'data_end',
+                        title: 'Data End'
+                    },
+                    {
+                        data: 'price_usd',
+                        title: 'Price (USD)'
+                    },
                 ],
                 responsive: true
             });
