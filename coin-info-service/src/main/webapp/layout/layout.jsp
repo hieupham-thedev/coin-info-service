@@ -12,6 +12,7 @@
     <script type="text/javascript" src="/lib/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
     <script type="text/javascript" src="/lib/datatables.net-responsive/js/dataTables.responsive.js"></script>
     <script type="text/javascript" src="/lib/datatables.net-responsive-bs4/js/responsive.bootstrap4.js"></script>
+    <script type="text/javascript" src="/lib/sweetalert2/dist/sweetalert2.all.js"></script>
 </head>
 <body>
 <tiles:insertAttribute name="header"/>

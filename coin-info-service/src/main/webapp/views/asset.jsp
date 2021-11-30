@@ -48,11 +48,46 @@
                         data: 'price_usd',
                         title: 'Price (USD)'
                     },
+                    {
+                        title: 'Action',
+                        render: function (data, type, row) {
+                            return `<button class="btn btn-primary" onclick="buyAsset('` + row.asset_id + `')">Buy</button>`
+                        }
+                    },
                 ],
                 responsive: true
             });
         });
 
+        function buyAsset(assetId) {
+            Swal.fire({
+                title: 'Do you want to buy this asset ?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    $.ajax({
+                        type: "POST",
+                        url: `${pageContext.request.contextPath}/api/asset/buy/` + assetId,
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Buy asset succeed',
+                                icon: 'success',
+                                showCloseButton: true,
+                            });
+                        },
+                        error: function (response) {
+                            Swal.fire({
+                                title: 'Buy asset failed',
+                                icon: 'error',
+                                showCloseButton: true,
+                            });
+                        }
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            });
+        }
     </script>
 </div>
 
