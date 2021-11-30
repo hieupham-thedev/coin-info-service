@@ -13,6 +13,9 @@ public class SupportController {
 
     @RequestMapping(value = "/status")
     public ResponseEntity<StatusDTO> checkStatus() {
-        return new ResponseEntity<>(new StatusDTO("Active", new Date()), HttpStatus.OK);
+        StatusDTO status = new StatusDTO();
+        status.setStatus("Active");
+        status.setCurrentTime(new Date());
+        return new ResponseEntity<>(status, HttpStatus.OK);
     }
 }

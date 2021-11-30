@@ -14,4 +14,8 @@
         <put-attribute name="title" value="Asset Information" />
         <put-attribute name="body" value="/views/asset.jsp" />
     </definition>
+    <definition name="bought-assets" extends="common">
+        <put-attribute name="title" value="Bought Asset Information" />
+        <put-attribute name="body" value="/views/bought-assets.jsp" />
+    </definition>
 </tiles-definitions>
