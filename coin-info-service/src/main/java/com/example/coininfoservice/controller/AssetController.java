@@ -4,13 +4,16 @@ import com.example.coininfoservice.dto.AssetDTO;
 import com.example.coininfoservice.dto.BoughtAssetDTO;
 import com.example.coininfoservice.service.BoughtAssetService;
 import com.example.coininfoservice.service.impl.CacheService;
+import com.example.coininfoservice.utils.ExcelExporter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -54,4 +57,16 @@ public class AssetController {
         return response;
     }
 
+    @GetMapping("/exportExcel")
+    public void exportToExcel(HttpServletResponse response) {
+        try {
+            List<AssetDTO> assets = cacheService.getCachedAssets();
+            List<String> headerFields = Arrays.asList("Asset ID", "Asset Name", "Is Crypto", "Start Date", "End Date", "Price");
+            List<String> dataFields = Arrays.asList("asset_id", "name", "type_is_crypto", "data_start", "data_end", "price_usd");
+            ExcelExporter<AssetDTO> assetExcelExporter = new ExcelExporter<>(headerFields, dataFields, assets);
+            assetExcelExporter.export(response, "Assets");
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
 }

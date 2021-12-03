@@ -1,4 +1,5 @@
 <div class="col-sm-9 main">
+
     <table id="myTable" class="table table-striped table-bordered">
     </table>
     <script>
@@ -57,6 +58,8 @@
                 ],
                 responsive: true
             });
+
+            $("#myTable_length").append(`<a id="exportButton" class="btn btn-success py-0 mx-2" href="${pageContext.request.contextPath}/api/asset/exportExcel">Export</a>`);
         });
 
         function buyAsset(assetId) {
