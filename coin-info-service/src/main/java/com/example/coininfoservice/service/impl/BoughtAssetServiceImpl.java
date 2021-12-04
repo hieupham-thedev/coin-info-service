@@ -1,9 +1,9 @@
 package com.example.coininfoservice.service.impl;
 
-import com.example.coininfoservice.dao.impl.BoughtAssetDao;
 import com.example.coininfoservice.dto.AssetDTO;
 import com.example.coininfoservice.dto.BoughtAssetDTO;
 import com.example.coininfoservice.entity.BoughtAsset;
+import com.example.coininfoservice.repository.BoughtAssetRepository;
 import com.example.coininfoservice.service.BoughtAssetService;
 import org.springframework.stereotype.Service;
 
@@ -16,26 +16,26 @@ public class BoughtAssetServiceImpl implements BoughtAssetService {
 
     private CacheService cacheService;
 
-    private BoughtAssetDao boughtAssetDao;
+    private BoughtAssetRepository boughtAssetRepository;
 
-    public BoughtAssetServiceImpl(CacheService cacheService, BoughtAssetDao boughtAssetDao) {
+    public BoughtAssetServiceImpl(CacheService cacheService, BoughtAssetRepository boughtAssetRepository) {
         this.cacheService = cacheService;
-        this.boughtAssetDao = boughtAssetDao;
+        this.boughtAssetRepository = boughtAssetRepository;
     }
 
     @Override
     public boolean buyAsset(String assetId) {
         List<AssetDTO> assets = cacheService.getCachedAssets();
 
-        Optional<AssetDTO> foundAsset = assets.stream().filter(assetDTO -> {
-            return assetId.equals(assetDTO.getAssetId());
-        }).findFirst();
+        Optional<AssetDTO> foundAsset = assets.stream()
+                .filter(assetDTO -> assetId.equals(assetDTO.getAssetId()))
+                .findFirst();
 
         if (foundAsset.isPresent()) {
             BoughtAsset boughtAsset = new BoughtAsset();
             boughtAsset.setAssetId(foundAsset.get().getAssetId());
             boughtAsset.setBoughtPriceUSD(foundAsset.get().getPriceUSD());
-            if (boughtAssetDao.readOne(assetId) == null && boughtAssetDao.create(boughtAsset) != null) {
+            if (!boughtAssetRepository.existsById(assetId) && boughtAssetRepository.save(boughtAsset) != null) {
                 return true;
             }
         }
@@ -44,7 +44,7 @@ public class BoughtAssetServiceImpl implements BoughtAssetService {
 
     @Override
     public List<BoughtAssetDTO> getBoughtAssets() {
-        List<BoughtAsset> boughtAssets = boughtAssetDao.readAll();
+        List<BoughtAsset> boughtAssets = boughtAssetRepository.findAll();
         List<AssetDTO> assets = cacheService.getCachedAssets();
 
         List<BoughtAssetDTO> boughtAssetDTOs = boughtAssets.stream().map(boughtAsset -> {
